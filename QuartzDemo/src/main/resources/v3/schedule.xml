@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScheduleJobs>
+	<enableSchedule>false</enableSchedule>
+    <jobs>
+		<!-- 
+		<group name="分组名称(必填)">
+			<job name="Job名称(必填)" class="Job类(必填)" factoryType="类的产生方式(new(新建)/spring(容器中获取)/job(继承自Job))(必填)" method="目标方法(new和spring方式需要指定(必填))" ifSync="是否同步执行(true/false(new和spring方式需要指定(必填)))" desc="Job描述">
+				<jobDataMap>
+					<item key="参数key" value="参数value" />
+					<item key="参数key" value="参数value" />
+				</jobDataMap>
+				<triggers>
+					<trigger name="名称(必填)" priority="优先级(两个以上必填,数值高的先执行)" type="类型(simple-(S/MI/H/D/W/M)/corn)(必填)" expression="定时表达式(必填)" startAt="开始时间(格式：yyyy-MM-dd HH:mm:ss)(选填)" endAt="结束时间(格式：yyyy-MM-dd HH:mm:ss)(选填)" desc="描述(选填)"/>
+					<trigger name="名称(必填)" priority="优先级(两个以上必填,数值高的先执行)" type="类型(simple-(S/MI/H/D/W/M)/corn)(必填)" expression="定时表达式(必填)" startAt="开始时间(格式：yyyy-MM-dd HH:mm:ss)(选填)" endAt="结束时间(格式：yyyy-MM-dd HH:mm:ss)(选填)" desc="描述(选填)"/>
+				</triggers>
+			</job>
+		</group> 
+		<![CDATA[
+		    type="corn" expression="0/3 * * * * ?"    //使用corn表达式
+		    type="simple-S" expression="3/2"          //每隔3秒执行一次,共执行2次(N代表无限执行下去)
+		    type="simple-MI" expression="3/N"         //每隔3分执行一次,无限执行下去
+		    type="simple-H" expression="3/5"          //每隔3小时执行一次,共执行5次
+		    type="simple-D" expression="13/20"        //每天的13点20执行一次
+		    type="simple-W" expression="2/13/20"      //每个星期一的13点20执行一次(星期日1/星期一2/星期二3/星期三4/星期四5/星期五6/星期六7)
+		    type="simple-M" expression="5/13/20"      //每个月的第5天13点20执行一次
+		]]>
+		-->
+		<group name="SCHEDULE_OPENAPI_">
+            <job name="testJob" class="com.sen.scheduler.TestJob" factoryType="job" desc="">
+                <jobDataMap>
+                    <item key="testKey" value="1234" />
+                    <item key="key" value="value" />
+                </jobDataMap>
+                <triggers>
+                    <!-- <trigger name="testJob1" priority="2" type="simple-S" expression="3/2" startAt="" endAt="" desc=""/> -->
+                    <trigger name="testJob2" priority="1" type="corn" expression="0/3 * * * * ?" startAt="" endAt="" desc=""/>
+                </triggers>
+            </job>
+            <job name="testSyncJob" class="com.sen.scheduler.TestSyncJob" factoryType="job" desc="">
+                <triggers>
+                    <!-- <trigger name="testSyncJob1" priority="2" type="simple-S" expression="3/2" startAt="" endAt="" desc=""/> -->
+                    <trigger name="testSyncJob2" priority="1" type="corn" expression="0/3 * * * * ?" startAt="" endAt="" desc=""/>
+                </triggers>
+            </job>
+            <job name="testNew" class="com.sen.scheduler.TestNew" factoryType="new"  method="test"  ifSync="" desc="">
+                <triggers>
+                    <trigger name="testNew" priority="2" type="simple-S" expression="3/15" startAt="" endAt="" desc=""/>
+                </triggers>
+            </job>
+            <job name="testSpring" class="com.sen.scheduler.TestSpring" factoryType="spring"  method="test"  ifSync="true" desc="">
+                <triggers>
+                    <trigger name="testSpring" priority="2" type="simple-S" expression="3/15" startAt="" endAt="" desc=""/>
+                </triggers>
+            </job>
+        </group>
+	</jobs>
+</ScheduleJobs>

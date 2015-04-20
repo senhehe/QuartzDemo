@@ -6,3 +6,11 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
+**/target/
+**/bin/
+.settings
+.project
+.classpath
+.class
+.git
+.gitignore
